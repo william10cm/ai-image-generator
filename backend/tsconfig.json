@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    /* Modern Node.js supports modern JS features, so we can target a recent ES version */
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+
+    /* Where compiled JavaScript files go */
+    "outDir": "dist",
+    /* Where our TypeScript source files live */
+    "rootDir": "src",
+
+    /* Strict mode catches more bugs at compile time - great for learning TS */
+    "strict": true,
+
+    /* Allows "import express from 'express'" syntax for CommonJS modules */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* Helps catch unused variables/parameters - good habit while learning */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    /* Adds Jest's global functions (describe, it, expect, jest, ...) */
+    "types": ["jest", "node"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "src/tests"]
+}
