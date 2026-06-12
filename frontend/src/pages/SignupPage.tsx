@@ -52,7 +52,13 @@ function SignupPage() {
         </label>
         {error && <p className="auth-page__error">{error}</p>}
         <button type="submit" disabled={isLoading}>
-          {isLoading ? "Creating account..." : "Sign Up"}
+          {isLoading ? (
+            <>
+              <span className="spinner" aria-hidden="true" /> Creating account...
+            </>
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </form>
       <p className="auth-page__switch">

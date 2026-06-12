@@ -38,6 +38,10 @@
 }
 
 .auth-page button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
   padding: var(--space-sm) var(--space-lg);
   font-size: 1rem;
   font-weight: 600;
@@ -46,6 +50,7 @@
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .auth-page button:hover:not(:disabled) {

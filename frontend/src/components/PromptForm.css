@@ -9,6 +9,16 @@
   gap: var(--space-sm);
 }
 
+@media (max-width: 480px) {
+  .prompt-form__row {
+    flex-direction: column;
+  }
+
+  .prompt-form__button {
+    justify-content: center;
+  }
+}
+
 .prompt-form__input {
   flex: 1;
   padding: var(--space-sm) var(--space-md);
@@ -25,6 +35,9 @@
 }
 
 .prompt-form__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
   padding: var(--space-sm) var(--space-lg);
   font-size: 1rem;
   font-weight: 600;
@@ -33,6 +46,7 @@
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .prompt-form__button:hover:not(:disabled) {

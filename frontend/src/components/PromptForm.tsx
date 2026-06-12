@@ -43,7 +43,13 @@ function PromptForm({
           className="prompt-form__button"
           disabled={isLoading || !prompt.trim()}
         >
-          {isLoading ? "Generating..." : "Generate"}
+          {isLoading ? (
+            <>
+              <span className="spinner" aria-hidden="true" /> Generating...
+            </>
+          ) : (
+            "Generate"
+          )}
         </button>
       </div>
     </form>

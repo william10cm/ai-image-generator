@@ -28,6 +28,17 @@ function authHeaders(): Record<string, string> {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+// Wraps fetch() so that network failures (server down, no internet, CORS
+// misconfiguration, etc.) throw the same friendly Error type as a normal
+// API error response, instead of a raw "Failed to fetch" TypeError.
+async function apiFetch(path: string, options?: RequestInit): Promise<Response> {
+  try {
+    return await fetch(`${API_BASE_URL}${path}`, options);
+  } catch {
+    throw new Error("Unable to reach the server. Check your connection and try again.");
+  }
+}
+
 // POST /api/auth/signup - creates a new account and returns a token
 export async function signup(email: string, password: string): Promise<AuthResponse> {
   return authRequest("/api/auth/signup", email, password);
@@ -39,7 +50,7 @@ export async function login(email: string, password: string): Promise<AuthRespon
 }
 
 async function authRequest(path: string, email: string, password: string): Promise<AuthResponse> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
+  const response = await apiFetch(path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -57,7 +68,7 @@ async function authRequest(path: string, email: string, password: string): Promi
 // Calls our backend's /api/generate endpoint, which talks to the AI
 // image API and returns the resulting image's URL.
 export async function generateImage(prompt: string): Promise<string> {
-  const response = await fetch(`${API_BASE_URL}/api/generate`, {
+  const response = await apiFetch("/api/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json", ...authHeaders() },
     body: JSON.stringify({ prompt }),
@@ -74,7 +85,7 @@ export async function generateImage(prompt: string): Promise<string> {
 
 // Calls our backend's /api/gallery endpoint to fetch past generations.
 export async function fetchGallery(): Promise<GalleryItem[]> {
-  const response = await fetch(`${API_BASE_URL}/api/gallery`, {
+  const response = await apiFetch("/api/gallery", {
     headers: authHeaders(),
   });
 

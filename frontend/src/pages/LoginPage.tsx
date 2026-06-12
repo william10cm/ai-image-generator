@@ -51,7 +51,13 @@ function LoginPage() {
         </label>
         {error && <p className="auth-page__error">{error}</p>}
         <button type="submit" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Log In"}
+          {isLoading ? (
+            <>
+              <span className="spinner" aria-hidden="true" /> Logging in...
+            </>
+          ) : (
+            "Log In"
+          )}
         </button>
       </form>
       <p className="auth-page__switch">

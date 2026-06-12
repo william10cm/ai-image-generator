@@ -28,9 +28,42 @@
   box-sizing: border-box;
 }
 
+/* Consistent keyboard-focus ring across the app, without adding an
+   outline to elements that already show focus via :focus styles. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 body {
   margin: 0;
   font-family: var(--font-family);
   background-color: var(--color-bg);
   color: var(--color-text);
+}
+
+/* Small spinning circle used inside buttons to show a request is in
+   flight. Shared across pages so every "loading" button looks the same. */
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: -0.15em;
+}
+
+/* Variant for use on light backgrounds (e.g. inline with body text). */
+.spinner--dark {
+  border-color: var(--color-border);
+  border-top-color: var(--color-text-muted);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
