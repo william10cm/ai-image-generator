@@ -9,8 +9,10 @@ import galleryRouter from "./routes/gallery";
 
 const app = express();
 
-// Allow the frontend (running on a different port) to call this API
-app.use(cors());
+// Allow the frontend to call this API. FRONTEND_URL is set in production;
+// falls back to localhost for local dev.
+const allowedOrigin = process.env.FRONTEND_URL || "http://localhost:5173";
+app.use(cors({ origin: allowedOrigin }));
 
 // Parse incoming JSON request bodies into req.body
 app.use(express.json());
